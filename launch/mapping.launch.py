@@ -3,7 +3,7 @@ import os.path
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, TimerAction
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.conditions import IfCondition
 
@@ -43,6 +43,30 @@ def generate_launch_description():
         description='RViz config file path'
     )
 
+    lidar_static_transform_publisher_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=[
+            '0.45', '0.4', '0.79',
+            '1.5708', '0.0', '3.14159',
+            'base_link',
+            'livox_frame'
+        ],
+        name='lidar_static_transform_publisher',
+    )
+
+    imu_static_transform_publisher_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        arguments=[
+            '0.0', '0.0', '0.79',
+            '0.0', '0.0', '0.0',
+            'base_link',
+            'imu'
+        ],
+        name='imu_static_transform_publisher',
+    )
+
     fast_lio_node = Node(
         package='fast_lio',
         executable='fastlio_mapping',
@@ -57,6 +81,12 @@ def generate_launch_description():
         condition=IfCondition(rviz_use)
     )
 
+    timer_action = TimerAction(
+        period=1.0,  # wait for 1 second
+        actions=[fast_lio_node]
+    )
+
+
     ld = LaunchDescription()
     ld.add_action(declare_use_sim_time_cmd)
     ld.add_action(declare_config_path_cmd)
@@ -64,7 +94,9 @@ def generate_launch_description():
     ld.add_action(declare_rviz_cmd)
     ld.add_action(declare_rviz_config_path_cmd)
 
-    ld.add_action(fast_lio_node)
-    ld.add_action(rviz_node)
+    ld.add_action(timer_action)
+    ld.add_action(lidar_static_transform_publisher_node)
+    ld.add_action(imu_static_transform_publisher_node)
+    # ld.add_action(rviz_node)
 
     return ld
