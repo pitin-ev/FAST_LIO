@@ -47,7 +47,7 @@ def generate_launch_description():
         package='tf2_ros',
         executable='static_transform_publisher',
         arguments=[
-            '0.45', '0.4', '0.79',
+            '0.375', '0.125', '0.79',
             '1.5708', '0.0', '3.14159',
             'base_link',
             'livox_frame'
