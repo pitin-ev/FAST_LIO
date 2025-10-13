@@ -10,7 +10,7 @@
         map_file_path: "./test.pcd"
 
         common:
-            lid_topic:  "/custom_filtered_points"
+            lid_topic:  "/custom_merged_cloud"
             imu_topic:  "/imu"
             time_sync_en: false         # ONLY turn on when external time synchronization is really not possible
             time_offset_lidar_to_imu: 0.0 # Time offset between lidar and IMU calibrated by other algorithms, e.g. LI-Init (can be found in README).
@@ -31,8 +31,8 @@
             fov_degree:    360.0
             det_range:     100.0
             extrinsic_est_en:  true      # true: enable the online estimation of IMU-LiDAR extrinsic
-            extrinsic_T: [ 0.45, 0.4, 0.0 ] # Translation vector of the extrinsic parameter / IMU 기준 LIDAR TF
-            extrinsic_R: [ 0., 1.,  0.,   
+            extrinsic_T: [ 0.0, -0.245, 0.0 ] # Translation vector of the extrinsic parameter / IMU 기준 LIDAR TF
+            extrinsic_R: [ 0., 1.,  0.,
                            1., 0.,  0.,
                            0., 0., -1.]     # Rotation matrix of the extrinsic parameter
 
@@ -45,6 +45,6 @@
             scan_bodyframe_pub_en: true  # true: output the point cloud scans in IMU-body-frame
 
         pcd_save:
-            pcd_save_en: true
-            interval: -1                 # how many LiDAR frames saved in each pcd file; 
-                                        # -1 : all frames will be saved in ONE pcd file, may lead to memory crash when having too much frames.
+            pcd_save_en: false
+            interval: 20                 # how many LiDAR frames saved in each pcd file; 
+                                         # -1 : all frames will be saved in ONE pcd file, may lead to memory crash when having too much frames.
