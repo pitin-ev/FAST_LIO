@@ -9,8 +9,8 @@ fig, axs = plt.subplots(4,2)
 lab_pre = ['', 'pre-x', 'pre-y', 'pre-z']
 lab_out = ['', 'out-x', 'out-y', 'out-z']
 plot_ind = range(7,10)
-a_pre=np.loadtxt('mat_pre.txt')
-a_out=np.loadtxt('mat_out.txt')
+a_pre=np.loadtxt('/home/amr1/ws/src/PI_amr_v2_navigation/FAST_LIO/Log/mat_pre.txt')
+a_out=np.loadtxt('/home/amr1/ws/src/PI_amr_v2_navigation/FAST_LIO/Log/mat_out.txt')
 time=a_pre[:,0]
 axs[0,0].set_title('Attitude')
 axs[1,0].set_title('Translation')
@@ -22,12 +22,12 @@ axs[2,1].set_title('ba')
 axs[3,1].set_title('Gravity')
 for i in range(1,4):
     for j in range(8):
-        axs[j%4, j/4].plot(time, a_pre[:,i+j*3],'.-', label=lab_pre[i])
-        axs[j%4, j/4].plot(time, a_out[:,i+j*3],'.-', label=lab_out[i])
+        axs[j%4, j//4].plot(time, a_pre[:,i+j*3],'.-', label=lab_pre[i])
+        # axs[j%4, j//4].plot(time, a_out[:,i+j*3],'.-', label=lab_out[i])
 for j in range(8):
     # axs[j].set_xlim(386,389)
-    axs[j%4, j/4].grid()
-    axs[j%4, j/4].legend()
+    axs[j%4, j//4].grid()
+    axs[j%4, j//4].legend()
 plt.grid()
 #######for ikfom#######
 

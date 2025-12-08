@@ -611,7 +611,7 @@ void publish_map(rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub
     pcl::toROSMsg(*pcl_wait_pub, laserCloudmsg);
     laserCloudmsg.header.stamp = get_ros_time(lidar_end_time);
     laserCloudmsg.header.frame_id = "odom";
-    pubLaserCloudMap->publish(laserCloudmsg);
+    // pubLaserCloudMap->publish(laserCloudmsg);
 }
 
 void save_to_pcd()

@@ -31,7 +31,7 @@
             fov_degree:    360.0
             det_range:     100.0
             extrinsic_est_en:  true      # true: enable the online estimation of IMU-LiDAR extrinsic
-            extrinsic_T: [ 0.0, -0.245, 0.0 ] # Translation vector of the extrinsic parameter / IMU 기준 LIDAR TF
+            extrinsic_T: [ 0.0, -0.112, 0.0 ] # Translation vector of the extrinsic parameter / IMU 기준 LIDAR TF
             extrinsic_R: [ 1., 0.,  0.,
                            0., 1.,  0.,
                            0., 0., -1.]     # Rotation matrix of the extrinsic parameter
